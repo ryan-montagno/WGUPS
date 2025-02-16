@@ -1,5 +1,6 @@
 import string
 import random
+import csv
 
 from PackageModule import Package
 from HashModule import PackageHash
@@ -17,11 +18,7 @@ packageList.append(Package(1, "123 street road", "Ridley", "PA", "12346", "9:30"
 for i in range(len(packageList)):
     packageHash.insert(packageList[i].id, packageList[i])
 
-for i in range(40):
-    list = packageHash.hashTable[i]
-    print(i)
-    for j in range(len(list)):
-        print(list[j-1])
+with open(.)
 
 
 
