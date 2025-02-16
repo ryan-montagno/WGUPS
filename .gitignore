@@ -1,0 +1,7 @@
+
+
+#ignore .idea directory
+.idea/
+
+#ignore python config files
+__pycache__

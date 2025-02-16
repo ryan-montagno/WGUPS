@@ -8,7 +8,6 @@ package = Package(5, "123 street road", "Ridley", "PA", "12345", "10:30", 100, "
 hashTable = Hash(40)
 
 list = []
-randNum = 0
 
 class testItem:
 
@@ -17,17 +16,20 @@ class testItem:
         self.string = string
 
 for i in range(40):
-    randNum = random.randint(1, 39)
+    randNum = random.randrange(1, 39)
     list.append(testItem(randNum, f'I am {randNum}'))
-    print (list[i-1].id)
+    print (f'{list[i-1].id} {list[i-1].string}')
 
 for i in range(40):
     hashTable.insert(list[i-1].id, list[i-1].string)
 
 for i in range(40):
     chain = hashTable.table[i-1]
-    for item in chain:
-        print (f'{i} {item}')
+    print(i)
+    for j in range(len(chain)):
+        print(chain[j])
+
+
 
 
 

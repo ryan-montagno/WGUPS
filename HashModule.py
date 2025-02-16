@@ -5,14 +5,12 @@ from operator import truediv
 
 class Hash:
 
-    capacity = 1
-    table =[]
 
     #Initializes a Has object
     def __init__ (self, capacity):
         #The hash table
-        table = []
-        capacity = int(capacity)
+        self.table = []
+        self.capacity = int(capacity)
 
         #Addss chains(lists) to the hash table. 'capacity' should be set to number of packagaes being delivered
         for i in range(capacity):
