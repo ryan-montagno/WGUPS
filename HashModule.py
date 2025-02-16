@@ -1,3 +1,4 @@
+from contextlib import nullcontext
 from operator import truediv
 
 
@@ -17,22 +18,21 @@ class PackageHash:
             self.hashTable.append([])
 
     def insert (self, key, value):
-        bucket = hash(key % self.capacity)
-        bucketlist = self.hashTable[bucket]
-        if value not in bucketlist:
-            bucketlist.append(value)
+        bucket = self.hashTable[hash(key % self.capacity)]
+        if value not in bucket:
+            bucket.append(value)
 
     def search(self, key):
-        bucket = hash(key % self.capacity)
-        bucketlist = self.hashTable[bucket]
-        if key in bucketlist:
-            return bucketlist.index(key)
-        return -1
+        bucket = self.hashTable[hash(key % self.capacity)]
+        for item in bucket:
+            if item.id == key:
+                return item
+        return False
 
     def remove(self, key):
-        bucket = hash(key % self.capacity)
-        bucketlist = self.hashTable[bucket]
-        if key in bucketlist:
-            bucketlist.remove(key)
-            return True
+        bucket = self.hashTable[hash(key % self.capacity)]
+        for item in bucket:
+            if item.id == key:
+                bucket.remove(key)
+                return True
         return False
