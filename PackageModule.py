@@ -1,16 +1,32 @@
+from contextlib import nullcontext
+
 
 class Package:
 
-    def __init__(self, id, address, deadline, city, zipcode, weight, status):
+    id = 0
+    address = ""
+    city = ""
+    state = ""
+    zipcode = ""
+    deadline = ""
+    weight = 0
+    notes = ""
+    status = ""
+
+
+    def __init__(self, id, address, city, state, zipcode, deadline, weight, notes, status):
         self.id = id
         self.address = address
-        self.deadline = deadline
         self.city = city
+        self.state = state
         self.zipcode = zipcode
+        self.deadline = deadline
         self.weight = weight
+        self.notes = notes
         self.status = status
 
+
     def __str__(self):
-        return f'ID: {self.id}\nAddress: {self.address}\nDeadline: {self.deadline}\nCity: {self.city}\nZipcode: {self.zipcode}\nWeight: {self.weight}\nStatus: {self.status}'
+        return f'ID: {self.id}\nAddress: {self.address}\nCity: {self.city}\nState: {self.state}\nZipcode: {self.zipcode}\nDeadline: {self.deadline}\nWeight: {self.weight}\nNotes: {self.notes}\nStatus: {self.status}'
 
 
