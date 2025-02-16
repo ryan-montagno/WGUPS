@@ -2,32 +2,33 @@ import string
 import random
 
 from PackageModule import Package
-from HashModule import Hash
+from HashModule import PackageHash
 
-package = Package(5, "123 street road", "Ridley", "PA", "12345", "10:30", 100, "Deliver by 10:30", "On time")
-hashTable = Hash(40)
+packageList = []
+packageHash = PackageHash(40)
 
-list = []
+packageList.append(Package(5, "456 street road", "Ridley", "PA", "12345", "10:30", 100, "Deliver by 10:30", "On time"))
+packageList.append(Package(41, "987 street road", "Ridley", "PA", "12346", "9:30", 10, "Deliver by 9:30", "On time"))
+packageList.append(Package(12, "789 street road", "Ridley", "PA", "12346", "9:30", 10, "Deliver by 9:30", "On time"))
+packageList.append(Package(45, "654 street road", "Ridley", "PA", "12346", "9:30", 10, "Deliver by 9:30", "On time"))
+packageList.append(Package(1, "123 street road", "Ridley", "PA", "12346", "9:30", 10, "Deliver by 9:30", "On time"))
 
-class testItem:
 
-    def __init__(self, id, string):
-        self.id = id
-        self.string = string
-
-for i in range(40):
-    randNum = random.randrange(1, 39)
-    list.append(testItem(randNum, f'I am {randNum}'))
-    print (f'{list[i-1].id} {list[i-1].string}')
+for i in range(len(packageList)):
+    packageHash.insert(packageList[i].id, packageList[i])
 
 for i in range(40):
-    hashTable.insert(list[i-1].id, list[i-1].string)
-
-for i in range(40):
-    chain = hashTable.table[i-1]
+    list = packageHash.hashTable[i]
     print(i)
-    for j in range(len(chain)):
-        print(chain[j])
+    for j in range(len(list)):
+        print(list[j-1])
+
+
+
+
+
+
+
 
 
 
