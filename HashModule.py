@@ -25,14 +25,25 @@ class PackageHash:
     def search(self, key):
         bucket = self.hashTable[hash(key % self.capacity)]
         for item in bucket:
-            if item.id == key:
+            if item.getID() == key:
                 return item
+
+        print("Package not found.")
         return False
 
     def remove(self, key):
+
         bucket = self.hashTable[hash(key % self.capacity)]
+        print("Searching...")
         for item in bucket:
-            if item.id == key:
-                bucket.remove(key)
+            if item.getID() == key:
+                print("Package Deleted")
+                bucket.remove(item)
                 return True
+        print("Package not found")
         return False
+
+    def resize(self):
+        for bucket in self.hashTable:
+            if len(bucket) == 0:
+                self.hashTable.remove(bucket)

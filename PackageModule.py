@@ -9,7 +9,7 @@ class Package:
     state = ""
     zipcode = ""
     deadline = ""
-    weight = 0
+    weight = ""
     notes = ""
     status = ""
 
@@ -29,4 +29,5 @@ class Package:
     def __str__(self):
         return f'ID: {self.id}\nAddress: {self.address}\nCity: {self.city}\nState: {self.state}\nZipcode: {self.zipcode}\nDeadline: {self.deadline}\nWeight: {self.weight}\nNotes: {self.notes}\nStatus: {self.status}'
 
-
+    def getID(self):
+        return int(self.id)
