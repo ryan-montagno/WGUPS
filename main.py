@@ -20,21 +20,28 @@ with open("./assets/packages.csv", mode="r") as file:
     for lines in csvFile:
         packageHash.insert(int(lines[0]), Package(lines[0], lines[1], lines[2], lines[3], lines[4], lines[5], int(lines[6]), lines[7], lines[8]))
 
+with open("./assets/distances.csv", mode="r") as file2:
+
+    csvFile2 = csv.reader(file2)
+
+    distances = list(csvFile2)
+
 
 packageHash.insert(45, Package(45, "8389 street", "philly", "pa", "928393", "2:30pm", 45, "This is a test package", "On time"))
 
 
-packageHash.remove(14)
-print(len(packageHash.hashTable))
-packageHash.resize()
-print(len(packageHash.hashTable))
+#packageHash.remove(14)
+#print(len(packageHash.hashTable))
+#packageHash.resize()
+#print(len(packageHash.hashTable))
 
 
 #for bucket in packageHash.hashTable:
 #   for package in bucket:
 #        print(package)
 
-
+for item in distances:
+    print(item)
 
 
 
