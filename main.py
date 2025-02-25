@@ -43,9 +43,9 @@ with open("assets/addresses.csv", mode="r") as file3:
 #
 # for item in distances:
 #     print(item)
-#
-# for addrress in adresses:
-#     print(addrress)
+
+for addrress in adresses:
+    print(addrress)
 
 
 
