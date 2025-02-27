@@ -32,13 +32,6 @@ with open("assets/addresses.csv", mode="r") as file3:
 
     addresses = list(csvFile3)
 
-#Takes two address ID's and gets the distance between the two from the distances list
-def getDistance(a, b):
-    #Uses logic to account for distances.csv only having half of the distances table
-    if distances[a][b] == "":
-        return distances[b][a]
-    return distances[a][b]
-
 #Takes an address (string) and returns its ID (int). For use with getDistance
 def getAddrID(address):
 
@@ -48,6 +41,14 @@ def getAddrID(address):
             return i
         i = i+1
     return -1
+
+#Takes two address ID's and gets the distance between the two from the distances list
+def getDistance(a, b):
+    #Uses logic to account for distances.csv only having half of the distances table
+    if distances[a][b] == "":
+        return distances[b][a]
+    return distances[a][b]
+
 
 
 
