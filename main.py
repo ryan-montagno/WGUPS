@@ -1,5 +1,6 @@
 
 import csv
+import datetime
 
 from PackageModule import Package
 from HashModule import PackageHash
@@ -38,22 +39,64 @@ def getAddrID(address):
     #Checks each adress in the list and return index of match (address ID)
     for i in range(len(addresses)):
         if addresses[i][1] == address:
-            return i
+            return int(i)
         i = i+1
     return -1
 
 #Takes two address ID's and gets the distance between the two from the distances list
 def getDistance(a, b):
+
     #Uses logic to account for distances.csv only having half of the distances table
     if distances[a][b] == "":
-        return distances[b][a]
-    return distances[a][b]
+        return float(distances[b][a])
+    return float(distances[a][b])
+
+truck1 = Truck(1, 18, 0, [1, 13, 14, 15, 16, 20, 29, 30, 31, 34, 37, 40], 16, "4001 South 700 East",  datetime.timedelta(hours=8))
+
+truck2 = Truck(1, 18, 0, [3, 6, 12, 17, 18, 19, 21, 22, 23, 24, 26, 27, 35, 36, 38, 39], 16, "",  datetime.timedelta(hours=8))
+
+truck3 = Truck(1, 18, 0, [2, 4, 5, 6, 7, 8, 9, 10, 11, 25, 28, 32, 33], 16, "",  datetime.timedelta(hours=8))
+
+def timeToDeliver(distance, speed):
+
+    return ((distance / speed) * 60)
+
+def deliver(truck):
+
+    undeliveredPackages = []
+    deliveredPackages = []
+    deliveryTime= 0
+    for item in truck.packages:
+        undeliveredPackages.append(packageHash.search(item))
+
+    currentAddr = truck.startingAddr
+    currentPackage = None
+    currentDistance = 20
+
+    while len(undeliveredPackages) > 0:
+
+        for package in undeliveredPackages:
+
+            if getDistance(getAddrID(currentAddr), getAddrID(package.address)) < currentDistance:
+                currentDistance = getDistance(getAddrID(currentAddr), getAddrID(package.address))
+                currentAddr = package.address
+                currentPackage = package
 
 
+        undeliveredPackages.remove(currentPackage)
+        deliveredPackages.append(currentPackage)
+        truck.addMilesDriven(currentDistance)
+        deliveryTime += timeToDeliver(currentDistance, truck.speedLimit)
+        currentDistance = 20
 
+    for package in deliveredPackages:
+        print (package.id)
 
+    print(truck.milesDriven)
+    print(deliveryTime)
 
- #####TESTING######
+deliver(truck2)
+######TESTING#################################################################################
 # packageHash.insert(45, Package(45, "8389 street", "philly", "pa", "928393", "2:30pm", 45, "This is a test package", "On time"))
 # packageHash.remove(14)
 # print(len(packageHash.hashTable))
@@ -77,6 +120,15 @@ def getDistance(a, b):
 # print(getDistance(2, 8))
 #
 # print(getAddrID("2300 Parkway Blvd"))
+#
+# print(truck1)
+# print(truck2)
+# print(truck3)
+###################################################################################################
+
+
+
+
 
 
 

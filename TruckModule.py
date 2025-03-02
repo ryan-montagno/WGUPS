@@ -5,7 +5,7 @@ class Truck:
 
         self.id = id
         self.speedLimit = speedLimit
-        self. mileDriven = milesDriven
+        self. milesDriven = milesDriven
         self. packages = packages
         self.maxPackages = maxPackages
         self.startingAddr = startingAddr
@@ -13,4 +13,8 @@ class Truck:
 
     def __str__(self):
 
-        return f"Truck {self.id} has {len(self.packages)} packages on board."
+        return f"At {self.startingTime} truck {self.id} has {len(self.packages)} packages on board."
+
+    def addMilesDriven(self, mile):
+
+        self.milesDriven += mile
