@@ -146,7 +146,7 @@ class Main:
     if(userInput == "All" or userInput == "all" or userInput == "ALL"):
 
         print("")
-        print("Truck 1:")
+        print(f"Truck 1 at {time}:")
         for item in truck1.packages:
             printPackage = packageHash.search(item)
             printPackage.updateStatus(time)
@@ -156,7 +156,7 @@ class Main:
                 print(f'Package {printPackage.id}: {printPackage.status}')
 
         print("")
-        print("Truck 2:")
+        print(f"Truck 2 at {time}:")
         for item in truck2.packages:
             printPackage = packageHash.search(item)
             printPackage.updateStatus(time)
@@ -166,7 +166,7 @@ class Main:
                 print(f'Package {printPackage.id}: {printPackage.status}')
 
         print("")
-        print("Truck 3:")
+        print(f"Truck 3 at {time}:")
         for item in truck3.packages:
             printPackage = packageHash.search(item)
             printPackage.updateStatus(time)
