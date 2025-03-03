@@ -23,7 +23,7 @@ class Package:
         self.deadline = deadline
         self.weight = weight
         self.notes = notes
-        self.status = status
+        self.status = "At hub."
 
 
     def __str__(self):
@@ -31,3 +31,5 @@ class Package:
 
     def getID(self):
         return int(self.id)
+
+
