@@ -103,13 +103,13 @@ class Main:
     print("Welcome to WGUPS!")
 
     print("Loading Trucks...")
-    truck1 = Truck(1, 18, 0, [1, 13, 14, 15, 16, 20, 29, 30, 31, 34, 37, 40], 16, "4001 South 700 East",
+    truck1 = Truck(1, 18, 0, [1, 13, 14, 15, 16, 19, 20, 29, 30, 31, 34, 37, 40], 16, "4001 South 700 East",
                    datetime.timedelta(hours=8))
 
-    truck2 = Truck(2, 18, 0, [2, 4, 5, 6, 7, 8, 9, 10, 11, 25, 28, 32, 33], 16, "4001 South 700 East",
+    truck2 = Truck(2, 18, 0, [2, 4, 5, 6, 7, 8, 9, 10, 11, 18, 25, 28, 32, 33, 36], 16, "4001 South 700 East",
                    datetime.timedelta(hours=10, minutes=20))
 
-    truck3 = Truck(3, 18, 0, [3, 6, 12, 17, 18, 19, 21, 22, 23, 24, 26, 27, 35, 36, 38, 39], 16, "4001 South 700 East",
+    truck3 = Truck(3, 18, 0, [3, 6, 12, 17, 21, 22, 23, 24, 26, 27, 35, 38, 39], 16, "4001 South 700 East",
                    datetime.timedelta(hours=9, minutes=5))
 
     print("Trucks departing hub...")
@@ -154,6 +154,8 @@ class Main:
                 print(f'Package {printPackage.id} Delivered at {printPackage.timeDelivered}')
             else:
                 print(f'Package {printPackage.id}: {printPackage.status}')
+            print(f'    {printPackage}')
+            print("")
 
         print("")
         print(f"Truck 2 at {time}:")
@@ -164,6 +166,8 @@ class Main:
                 print(f'Package {printPackage.id} Delivered at {printPackage.timeDelivered}')
             else:
                 print(f'Package {printPackage.id}: {printPackage.status}')
+            print(f'    {printPackage}')
+            print("")
 
         print("")
         print(f"Truck 3 at {time}:")
@@ -174,6 +178,8 @@ class Main:
                 print(f'Package {printPackage.id} Delivered at {printPackage.timeDelivered}')
             else:
                 print(f'Package {printPackage.id}: {printPackage.status}')
+            print(f'    {printPackage}')
+            print("")
 
     else:
         try:

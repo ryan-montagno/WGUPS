@@ -29,7 +29,7 @@ class Package:
 
 
     def __str__(self):
-        return f'ID: {self.id}\nAddress: {self.address}\nCity: {self.city}\nState: {self.state}\nZipcode: {self.zipcode}\nDeadline: {self.deadline}\nWeight: {self.weight}\nNotes: {self.notes}\nStatus: {self.status}'
+        return f'Address: {self.address} City: {self.city} State: {self.state} Zipcode: {self.zipcode} Deadline: {self.deadline} Weight: {self.weight} Notes: {self.notes} Status: {self.status}'
 
     def getID(self):
         return int(self.id)
