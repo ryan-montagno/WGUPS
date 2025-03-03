@@ -51,14 +51,6 @@ def getDistance(a, b):
         return float(distances[b][a])
     return float(distances[a][b])
 
-truck1 = Truck(1, 18, 0, [1, 13, 14, 15, 16, 20, 29, 30, 31, 34, 37, 40], 16, "4001 South 700 East",  datetime.timedelta(hours=8))
-
-truck2 = Truck(1, 18, 0, [2, 4, 5, 6, 7, 8, 9, 10, 11, 25, 28, 32, 33], 16, "4001 South 700 East",  datetime.timedelta(hours=9, minutes = 5))
-
-truck3 = Truck(1, 18, 0, [3, 6, 12, 17, 18, 19, 21, 22, 23, 24, 26, 27, 35, 36, 38, 39], 16, "4001 South 700 East",  datetime.timedelta(hours=10, minutes=20))
-
-
-
 def timeToDeliver(distance, speed):
 
     return ((distance / speed) * 60)
@@ -96,6 +88,39 @@ def deliver(truck):
 
     print(truck.milesDriven)
     print(deliveryTime)
+
+
+
+
+class Main:
+
+    print("Welcome to WGUPS!")
+
+    print("Loading Trucks...")
+    truck1 = Truck(1, 18, 0, [1, 13, 14, 15, 16, 20, 29, 30, 31, 34, 37, 40], 16, "4001 South 700 East",
+                   datetime.timedelta(hours=8))
+
+    truck2 = Truck(1, 18, 0, [2, 4, 5, 6, 7, 8, 9, 10, 11, 25, 28, 32, 33], 16, "4001 South 700 East",
+                   datetime.timedelta(hours=9, minutes=5))
+
+    truck3 = Truck(1, 18, 0, [3, 6, 12, 17, 18, 19, 21, 22, 23, 24, 26, 27, 35, 36, 38, 39], 16, "4001 South 700 East",
+                   datetime.timedelta(hours=10, minutes=20))
+
+    print("Trucks departing hub...")
+    print("Packages out for delivery...")
+    print("What would you like to do?")
+
+    usertime = input("Enter a time: ")
+
+    (h, m) = usertime.split(":")
+
+    time = datetime.timedelta(hours=int(h), minutes=int(m))
+
+    print(time)
+
+
+
+
 ######TESTING#################################################################################
 # packageHash.insert(45, Package(45, "8389 street", "philly", "pa", "928393", "2:30pm", 45, "This is a test package", "On time"))
 # packageHash.remove(14)
@@ -127,15 +152,6 @@ def deliver(truck):
 ###################################################################################################
 
 
-class Main:
-
-    usertime = input("Enter a time: ")
-
-    (h, m) = usertime.split(":")
-
-    time = datetime.timedelta(hours=int(h), minutes=int(m))
-
-    print(time)
 
 
 
