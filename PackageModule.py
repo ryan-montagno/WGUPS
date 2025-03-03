@@ -24,6 +24,8 @@ class Package:
         self.weight = weight
         self.notes = notes
         self.status = "At hub."
+        self.timeDelivered = None
+        self.timeDeparted = None
 
 
     def __str__(self):
@@ -32,4 +34,12 @@ class Package:
     def getID(self):
         return int(self.id)
 
+    def updateStatus(self, userTime):
+
+        if self.timeDelivered < userTime:
+            self.status = "Delivered"
+        elif self.timeDeparted < userTime:
+            self.status = "En route"
+        else:
+            self.status = "At Hub"
 

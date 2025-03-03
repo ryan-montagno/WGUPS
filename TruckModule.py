@@ -1,3 +1,5 @@
+import datetime
+
 
 class Truck:
 
@@ -10,6 +12,7 @@ class Truck:
         self.maxPackages = maxPackages
         self.startingAddr = startingAddr
         self.startingTime = startingTime
+        self.currentTime = startingTime
 
     def __str__(self):
 
@@ -18,3 +21,6 @@ class Truck:
     def addMilesDriven(self, mile):
 
         self.milesDriven += mile
+
+    def setCurrentTime(self, timeToAdd):
+        self.currentTime += timeToAdd

@@ -53,43 +53,49 @@ def getDistance(a, b):
 
 def timeToDeliver(distance, speed):
 
-    return ((distance / speed) * 60)
+    time =(distance / speed)
+
+    hours = int(time)
+
+    minutes = int((time * 60) % 60)
+
+    return (datetime.timedelta(hours=hours, minutes=minutes))
 
 def deliver(truck):
 
+    #helper variables
     undeliveredPackages = []
     deliveredPackages = []
-    deliveryTime= 0
+
+    #loads packages into a list for internal use
     for item in truck.packages:
+        packageHash.search(item).timeDeparted = truck.startingTime
         undeliveredPackages.append(packageHash.search(item))
 
+
+    #Sets starting values for delivery
     currentAddr = truck.startingAddr
     currentPackage = None
     currentDistance = 20
 
+    #Run until all packages are delivered
     while len(undeliveredPackages) > 0:
 
+        #Checks the distance form current address to each package
         for package in undeliveredPackages:
-
+            #If the distance is smaller than the current distance, package is selected
             if getDistance(getAddrID(currentAddr), getAddrID(package.address)) < currentDistance:
                 currentDistance = getDistance(getAddrID(currentAddr), getAddrID(package.address))
-                currentAddr = package.address
                 currentPackage = package
 
-
+        #Once shortest distance is found, variables are updated and package is removed form unDeliveredPackages
+        currentAddr = currentPackage.address
         undeliveredPackages.remove(currentPackage)
         deliveredPackages.append(currentPackage)
         truck.addMilesDriven(currentDistance)
-        deliveryTime += timeToDeliver(currentDistance, truck.speedLimit)
+        truck.setCurrentTime(timeToDeliver(currentDistance, truck.speedLimit))
+        currentPackage.timeDelivered = truck.currentTime
         currentDistance = 20
-
-    for package in deliveredPackages:
-        print (package.id)
-
-    print(truck.milesDriven)
-    print(deliveryTime)
-
-
 
 
 class Main:
@@ -100,25 +106,90 @@ class Main:
     truck1 = Truck(1, 18, 0, [1, 13, 14, 15, 16, 20, 29, 30, 31, 34, 37, 40], 16, "4001 South 700 East",
                    datetime.timedelta(hours=8))
 
-    truck2 = Truck(1, 18, 0, [2, 4, 5, 6, 7, 8, 9, 10, 11, 25, 28, 32, 33], 16, "4001 South 700 East",
-                   datetime.timedelta(hours=9, minutes=5))
-
-    truck3 = Truck(1, 18, 0, [3, 6, 12, 17, 18, 19, 21, 22, 23, 24, 26, 27, 35, 36, 38, 39], 16, "4001 South 700 East",
+    truck2 = Truck(2, 18, 0, [2, 4, 5, 6, 7, 8, 9, 10, 11, 25, 28, 32, 33], 16, "4001 South 700 East",
                    datetime.timedelta(hours=10, minutes=20))
+
+    truck3 = Truck(3, 18, 0, [3, 6, 12, 17, 18, 19, 21, 22, 23, 24, 26, 27, 35, 36, 38, 39], 16, "4001 South 700 East",
+                   datetime.timedelta(hours=9, minutes=5))
 
     print("Trucks departing hub...")
     print("Packages out for delivery...")
-    print("What would you like to do?")
+    print("\n\n")
 
-    usertime = input("Enter a time: ")
+    #Send trucks out for delivery. Truck2 has package 9 with wrong address.
+    deliver(truck1)
+    deliver(truck3)
+    #Ensures Truck 2 does not leave until one other truck returns, but no earlier than 10:20 to account for package 9
+    if min(truck1.currentTime, truck3.currentTime) > datetime.timedelta(hours=10, minutes=20):
+        truck2.startingTime = min(truck1.currentTime, truck3.currentTime)
 
-    (h, m) = usertime.split(":")
+    deliver(truck2)
+    print('Total miles driven by all trucks:')
+    print(f'Truck 1: {truck1.milesDriven:.2f}')
+    print(f'Truck 2: {truck2.milesDriven:.2f}')
+    print(f'Truck 3: {truck3.milesDriven:.2f}')
+    print(f'Total: {(truck1.milesDriven + truck2.milesDriven + truck3.milesDriven):.2f}')
 
-    time = datetime.timedelta(hours=int(h), minutes=int(m))
+    userTime = input("To begin, please enter a time(hh:mm): ")
 
-    print(time)
+    (h, m) = userTime.split(":")
 
+    time = datetime.timedelta(hours=int(h), minutes=int(m), seconds=0)
 
+    print("\n\n")
+
+    print("To see the status of a package, enter its ID.\n"
+          "To see the status of all packages, enter \"All\"\n")
+
+    userInput = input("What would you like to do? ")
+
+    if(userInput == "All" or userInput == "all" or userInput == "ALL"):
+
+        print("")
+        print("Truck 1:")
+        for item in truck1.packages:
+            printPackage = packageHash.search(item)
+            printPackage.updateStatus(time)
+            if printPackage.status == "Delivered":
+                print(f'Package {printPackage.id} Delivered at {printPackage.timeDelivered}')
+            else:
+                print(f'Package {printPackage.id}: {printPackage.status}')
+
+        print("")
+        print("Truck 2:")
+        for item in truck2.packages:
+            printPackage = packageHash.search(item)
+            printPackage.updateStatus(time)
+            if printPackage.status == "Delivered":
+                print(f'Package {printPackage.id} Delivered at {printPackage.timeDelivered}')
+            else:
+                print(f'Package {printPackage.id}: {printPackage.status}')
+
+        print("")
+        print("Truck 3:")
+        for item in truck3.packages:
+            printPackage = packageHash.search(item)
+            printPackage.updateStatus(time)
+            if printPackage.status == "Delivered":
+                print(f'Package {printPackage.id} Delivered at {printPackage.timeDelivered}')
+            else:
+                print(f'Package {printPackage.id}: {printPackage.status}')
+
+    else:
+        try:
+            userInputInt = int(userInput)
+            userPackage = packageHash.search(userInputInt)
+
+            print(packageHash.search(4).timeDelivered)
+            userPackage.updateStatus(time)
+            if userPackage.status == "Delivered":
+                print(f'Package {userPackage.id} Delivered at {userPackage.timeDelivered}')
+            else:
+                print(f'Package {userPackage.id}: {userPackage.status}')
+
+        except ValueError:
+            print("No package found with that ID.")
+            exit()
 
 
 ######TESTING#################################################################################
