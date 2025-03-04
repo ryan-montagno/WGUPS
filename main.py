@@ -145,41 +145,27 @@ class Main:
 
     if(userInput == "All" or userInput == "all" or userInput == "ALL"):
 
-        print("")
-        print(f"Truck 1 at {time}:")
         for item in truck1.packages:
             printPackage = packageHash.search(item)
             printPackage.updateStatus(time)
             if printPackage.status == "Delivered":
-                print(f'Package {printPackage.id} Delivered at {printPackage.timeDelivered}')
+                print(f'Package {printPackage.id} Delivered at {printPackage.timeDelivered}     {printPackage}')
             else:
-                print(f'Package {printPackage.id}: {printPackage.status}')
-            print(f'    {printPackage}')
-            print("")
-
-        print("")
-        print(f"Truck 2 at {time}:")
+                print(f'Package {printPackage.id}: {printPackage.status}    {printPackage}')
         for item in truck2.packages:
             printPackage = packageHash.search(item)
             printPackage.updateStatus(time)
             if printPackage.status == "Delivered":
-                print(f'Package {printPackage.id} Delivered at {printPackage.timeDelivered}')
+                print(f'Package {printPackage.id} Delivered at {printPackage.timeDelivered}     {printPackage}')
             else:
-                print(f'Package {printPackage.id}: {printPackage.status}')
-            print(f'    {printPackage}')
-            print("")
-
-        print("")
-        print(f"Truck 3 at {time}:")
+                print(f'Package {printPackage.id}: {printPackage.status}    {printPackage}')
         for item in truck3.packages:
             printPackage = packageHash.search(item)
             printPackage.updateStatus(time)
             if printPackage.status == "Delivered":
-                print(f'Package {printPackage.id} Delivered at {printPackage.timeDelivered}')
+                print(f'Package {printPackage.id} Delivered at {printPackage.timeDelivered}     {printPackage}')
             else:
-                print(f'Package {printPackage.id}: {printPackage.status}')
-            print(f'    {printPackage}')
-            print("")
+                print(f'Package {printPackage.id}: {printPackage.status}    {printPackage}')
 
     else:
         try:
@@ -190,8 +176,12 @@ class Main:
             userPackage.updateStatus(time)
             if userPackage.status == "Delivered":
                 print(f'Package {userPackage.id} Delivered at {userPackage.timeDelivered}')
+                print(f'    {userPackage}')
+                print("")
             else:
                 print(f'Package {userPackage.id}: {userPackage.status}')
+                print(f'    {userPackage}')
+                print("")
 
         except ValueError:
             print("No package found with that ID.")
